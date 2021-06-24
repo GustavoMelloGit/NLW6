@@ -11,6 +11,8 @@ export const styles = StyleSheet.create({
         fontSize: 13,
         marginRight: 4,
         textAlign: "center",
-        borderRadius: 8
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: theme.colors.secondary50
     },
 })

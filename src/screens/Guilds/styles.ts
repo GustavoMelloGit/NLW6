@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        paddingTop: 24,
+        paddingTop: 10,
     },
     guilds:{
         width: '100%',

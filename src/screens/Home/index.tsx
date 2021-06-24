@@ -41,6 +41,84 @@ export function Home() {
       description:
         "É hoje que vamos chegar a challenger sem perder uma partida da md10",
     },
+    {
+      id: "3",
+      guild: {
+        id: "1",
+        name: "Lendários",
+        icon: null,
+        owner: true,
+      },
+      category: "1",
+      date: "22/06 às 22:00",
+      description:
+        "É hoje que vamos chegar a challenger sem perder uma partida da md10",
+    },
+    {
+      id: "4",
+      guild: {
+        id: "1",
+        name: "Lendários",
+        icon: null,
+        owner: true,
+      },
+      category: "1",
+      date: "22/06 às 22:00",
+      description:
+        "É hoje que vamos chegar a challenger sem perder uma partida da md10",
+    },
+    {
+      id: "5",
+      guild: {
+        id: "1",
+        name: "Lendários",
+        icon: null,
+        owner: true,
+      },
+      category: "1",
+      date: "22/06 às 22:00",
+      description:
+        "É hoje que vamos chegar a challenger sem perder uma partida da md10",
+    },
+    {
+      id: "6",
+      guild: {
+        id: "1",
+        name: "Lendários",
+        icon: null,
+        owner: true,
+      },
+      category: "1",
+      date: "22/06 às 22:00",
+      description:
+        "É hoje que vamos chegar a challenger sem perder uma partida da md10",
+    },
+    {
+      id: "7",
+      guild: {
+        id: "1",
+        name: "Lendários",
+        icon: null,
+        owner: true,
+      },
+      category: "1",
+      date: "22/06 às 22:00",
+      description:
+        "É hoje que vamos chegar a challenger sem perder uma partida da md10",
+    },
+    {
+      id: "8",
+      guild: {
+        id: "1",
+        name: "Lendários",
+        icon: null,
+        owner: true,
+      },
+      category: "1",
+      date: "22/06 às 22:00",
+      description:
+        "É hoje que vamos chegar a challenger sem perder uma partida da md10",
+    },
   ];
 
   function handleCategorySelect(categoryId: string) {
@@ -67,19 +145,20 @@ export function Home() {
           categorySelected={category}
           setCategory={handleCategorySelect}
         />
-        <View style={styles.content}>
-          <ListHeader title="Partidas Agendadas" subtitle="Total: 6" />
-          <FlatList
-            data={appointment}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <Appointment data={item} onPress={handleAppointmentDetails} />
-            )}
-            ItemSeparatorComponent={() => <ListDivider />}
-            style={styles.matches}
-            showsVerticalScrollIndicator={false}
+      
+        <ListHeader title="Partidas Agendadas" subtitle="Total: 6" />
+        
+        <FlatList
+          data={appointment}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+           <Appointment data={item} onPress={handleAppointmentDetails} />
+          )}
+          ItemSeparatorComponent={() => <ListDivider />}
+          contentContainerStyle={{paddingBottom: 100}}
+          style={styles.matches}
+          showsVerticalScrollIndicator={false}
           />
-        </View>
       </View>
     </Background>
   );

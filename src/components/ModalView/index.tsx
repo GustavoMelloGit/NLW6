@@ -1,25 +1,26 @@
 import React, { ReactNode } from "react";
 import { styles } from "./styles";
 import {
-  TouchableOpacity,
-  TouchableOpacityProps,
   View,
-  Text,
   Modal,
   ModalProps,
+  TouchableWithoutFeedback,
 } from "react-native";
-import { GuildIcon } from "../GuildIcon";
-import { Feather } from "@expo/vector-icons";
-import { theme } from "../../global/styles/theme";
 import { Background } from "../Background";
 
 type Props = ModalProps & {
   children: ReactNode;
+  closeModal: ()=>void
 };
 
-export function ModalView({ children, ...rest }: Props) {
+export function ModalView({ children, closeModal, ...rest }: Props) {
   return (
-    <Modal transparent animationType="slide" {...rest}>
+    <Modal 
+    transparent animationType="slide" 
+    {...rest}
+    statusBarTranslucent
+    >
+      <TouchableWithoutFeedback onPress={closeModal}>
       <View style={styles.overlay}>
         <View style={styles.container}>
           <Background>
@@ -28,6 +29,7 @@ export function ModalView({ children, ...rest }: Props) {
           </Background>
         </View>
       </View>
+      </TouchableWithoutFeedback>
     </Modal>
   );
 }
