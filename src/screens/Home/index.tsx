@@ -156,7 +156,7 @@ export function Home() {
           )}
           ItemSeparatorComponent={() => <ListDivider />}
           contentContainerStyle={{paddingBottom: 100}}
-          style={styles.matches}
+          style={[styles.matches]}
           showsVerticalScrollIndicator={false}
           />
       </View>
