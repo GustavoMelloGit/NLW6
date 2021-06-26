@@ -23,8 +23,9 @@ export function Home() {
     categoryId === category ? setCategory("") : setCategory(categoryId);
   }
 
-  function handleAppointmentDetails() {
-    navigation.navigate("AppointmentDetails");
+  function handleAppointmentDetails(guildSelected: AppointmentProps) {
+    navigation.navigate("AppointmentDetails", {guildSelected});
+    console.log(guildSelected.description);
   }
 
   function handleAppointmentCreate() {
@@ -44,9 +45,9 @@ export function Home() {
     setLoading(false);
   }
 
-  useFocusEffect(useCallback(()=>{
+  useFocusEffect(useCallback(() => {
     loadAppointments();
-  },[category]));
+  }, [category]));
 
   return (
     <Background>
@@ -55,31 +56,37 @@ export function Home() {
         <ButtonAdd onPress={handleAppointmentCreate} />
       </View>
 
-      
-        <CategorySelect
-          categorySelected={category}
-          setCategory={handleCategorySelect}
-        />
 
-        {
-          loading ? <Load/>:
+      <CategorySelect
+        categorySelected={category}
+        setCategory={handleCategorySelect}
+      />
+
+      {
+        loading ? <Load /> :
           <>
-            <ListHeader title="Partidas Agendadas" subtitle="Total: 6" />
+            <ListHeader
+              title="Partidas Agendadas"
+              subtitle={`Total ${appointments.length}`}
+            />
 
             <FlatList
               data={appointments}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
-                <Appointment data={item} onPress={handleAppointmentDetails} />
+                <Appointment
+                  data={item}
+                  onPress={()=>handleAppointmentDetails(item)}
+                />
               )}
               ItemSeparatorComponent={() => <ListDivider />}
-              contentContainerStyle={{ paddingBottom: 100 }}
+              contentContainerStyle={{ paddingBottom: 40 }}
               style={[styles.matches]}
               showsVerticalScrollIndicator={false}
             />
           </>
-        }
-      
+      }
+
     </Background>
   );
 }

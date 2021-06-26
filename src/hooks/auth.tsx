@@ -20,6 +20,7 @@ const  {CDN_IMAGE} = process.env;
 import {api} from '../services/api';
 
 import {COLLECTION_USERS} from '../configs/database';
+import asyncStorage from "@react-native-async-storage/async-storage";
 
 type User = {
     id: string;
@@ -34,6 +35,7 @@ type AuthContextData={
     user: User;
     loading: boolean;
     signIn: () => Promise<void>;
+    signOut: () => Promise<void>;
 }
 type AuthProviderProps={
     children: ReactNode;
@@ -80,6 +82,11 @@ function AuthProvider({ children }: AuthProviderProps){
         }
     }
 
+    async function signOut(){
+        setUser({ }as User);
+        await asyncStorage.removeItem(COLLECTION_USERS);
+    }
+
     async function loadUserStorageData(){
         const storage = await AsyncStorage.getItem(COLLECTION_USERS);
         if(storage){
@@ -96,7 +103,8 @@ function AuthProvider({ children }: AuthProviderProps){
         <AuthContext.Provider value={{
             user,
             signIn,
-            loading
+            loading,
+            signOut
         }}>
             {children}
         </AuthContext.Provider>
