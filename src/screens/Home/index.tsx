@@ -32,6 +32,10 @@ export function Home() {
     navigation.navigate("AppointmentCreate");
   }
 
+  function handleLongPress(){
+    console.log('lONG PRESS')
+  }
+
   async function loadAppointments() {
     const response = await AsyncStorage.getItem(COLLECTION_APPOINTMENS);
     const storage: AppointmentProps[] = response ? JSON.parse(response) : [];
@@ -48,6 +52,10 @@ export function Home() {
   useFocusEffect(useCallback(() => {
     loadAppointments();
   }, [category]));
+
+  async function handleDelete(){
+    
+  }
 
   return (
     <Background>
