@@ -4,7 +4,6 @@ import { RectButton } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import uuid from 'react-native-uuid';
-import { Appointment, AppointmentProps } from "../../components/Appointment";
 
 import {
   Text,
@@ -32,7 +31,7 @@ import { Alert } from 'react-native';
 
 export function AppointmentCreate() {
   const [category, setCategory] = useState('');
-  const [openGuildsModa, setOpenGuildsModal] = useState(false);
+  const [openGuildsModal, setOpenGuildsModal] = useState(false);
   const [guild, setGuild] = useState<GuildProps>({} as GuildProps);
 
   const [day, setDay] = useState('');
@@ -61,27 +60,49 @@ export function AppointmentCreate() {
   }
 
   function statesVerifier(): Boolean {
-    const integerDay = Number( day )
-    const integerMonth = Number(month )
-    const integerHour = Number( hour )
-    const integerMinutes = Number( minute )
+    const integerDay = Number(day)
+    const integerMonth = Number(month)
+    const integerHour = Number(hour)
+    const integerMinutes = Number(minute)
+    console.log(description)
 
-    if (integerDay > 31 || integerDay < 1)
+    if (integerDay < 1 || integerDay > 31) {
       return false;
-    else if (integerMonth < 1 || integerMonth > 12)
+    }
+    else if (integerMonth < 1 || integerMonth > 12) {
       return false;
-    else if (integerHour > 1 || integerHour > 23)
+    }
+    else if (integerHour < 1 || integerHour > 23) {
       return false;
-    else if (integerMinutes < 1 || integerMinutes > 59)
+    }
+    else if (integerMinutes < 1 || integerMinutes > 59) {
       return false;
-    
-    console.log(day)
+    }
+    else if (description.length === 0) {
+      return false;
+    }
     return true;
   }
 
+  function categoryVerifier(): Boolean {
+    const integerCategory = Number(category)
+    if (integerCategory < 1 || integerCategory > 4)
+      return false;
+    else
+      return true;
+  }
+
+  function guildVerifier(): Boolean {
+    if (guild === null) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
   async function handleSave() {
-    
-    if (statesVerifier()) {
+    if (statesVerifier() && categoryVerifier() && guildVerifier()) {
       const newAppointment = {
         id: uuid.v4(),
         guild,
@@ -99,9 +120,9 @@ export function AppointmentCreate() {
       );
 
       navigation.navigate('Home');
-    } 
+    }
     else {
-      Alert.alert('Entrada inválida, favor corrigir')
+      Alert.alert('Ops... Parece que você esqueceu de algo')
     }
 
   }
@@ -228,7 +249,7 @@ export function AppointmentCreate() {
         </ScrollView>
       </Background>
 
-      <ModalView visible={openGuildsModa} closeModal={handleCloseGuilds}>
+      <ModalView visible={openGuildsModal} closeModal={handleCloseGuilds}>
         <Guilds handleGuildSelect={handleGuildSelect} />
       </ModalView>
 
